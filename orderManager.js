@@ -3,6 +3,7 @@ const uuidv1 = require ('uuidv1');
 const AWS = require('aws-sdk');
 const dynamo = new AWS.DynamoDB.DocumentClient();
 const kinesis = new AWS.Kinesis();
+
 //env variable for table name and stream name specified in serverless.yml
 const TABLE_NAME = process.env.orderTableName
 const STREAM_NAME = process.env.orderStreamName;
@@ -85,5 +86,5 @@ function createFulfilledOrder(savedOrder,fulfillmentId){
     savedOrder.fulfillmentId = fulfillmentId;
     savedOrder.fulfillmentDate = Date.now();
     savedOrder.eventType = 'order_fulfilled';
-    return savedOrder
+    return savedOrder;
 }
